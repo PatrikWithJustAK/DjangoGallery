@@ -1,0 +1,24 @@
+{% comment " " %}
+The base.html template for this application will contain several components.
+All other templates will extend this template to inherit shared styling and scripts
+
+We will import TailwindCSS as a CDN on this template so that styling can be uniform throughout. 
+
+{% endcomment %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>PatrikGammon.com</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <h1>Test</h1>
+        {%block content%}
+        {%endblock%}
+        <script src="" async defer></script>
+    </body>
+</html>

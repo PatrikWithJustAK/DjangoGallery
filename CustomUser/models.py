@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import  UserManager, AbstractBaseUser, PermissionsMixin
 
-# Create your models here.
+# The Manager class which handles User objects
 class CustomUserManager(UserManager):
     def _create_user(self, email, password, **extra_fields):
         if not email:
@@ -23,7 +23,8 @@ class CustomUserManager(UserManager):
         extra_fields.setdefault('is_superuser', True)
         return self._create_user(email,password, **extra_fields)
     
-    
+# The Data Structure for our user
+# We utilize email+Pwd as login paramaters rather than uname+Pwd   
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(blank=True, default="", unique=True)
     name = models.CharField(max_length=255, blank=True, default='')
@@ -47,3 +48,5 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.name
     def get_short_name(self):
         return self.name or self.email.split('@')[0]
+    def __str__(self):
+        return self.name
