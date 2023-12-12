@@ -20,5 +20,5 @@ from CustomUser import urls as UserURLS
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("login/", include(UserURLS))
+    path("", include(UserURLS))
 ]

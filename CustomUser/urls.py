@@ -1,6 +1,9 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import Mainpageview
+from .views import mainpageview, loginview, indexview, signupview 
 urlpatterns = [
-    path("", Mainpageview.as_view()),
+    path("", mainpageview, name="main"),
+   path("login/", loginview, name = "login"),
+   path("index/", indexview, name = "index"),
+   path("signup/", signupview, name ="signup"),
 ]
