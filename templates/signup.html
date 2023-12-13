@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>
-    Testing signup page
-</h1>
+{% if user.is_authenticated %}
+<h1>{{user.name}}! You're already signed up!</h1>
+{% else %}
+<h3>Sign Up here!</h1>
+{%endif %}
+<h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+        {{ form.non_field_errors }}
+        {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+
 {% endblock  %}
+
