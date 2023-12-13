@@ -19,7 +19,7 @@ def loginview(request):
             password = form.cleaned_data.get('password')
             user = authenticate(request, email=email, password=password)
             if user is not None:
-                login(request, user)
+                login(request,user=user)
                 return redirect('index')  # Redirect to the index page after successful login
     else:
         form = UserAuthenticationForm()  # Initialize the form correctly for GET requests
