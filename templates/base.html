@@ -17,22 +17,21 @@ We will import TailwindCSS as a CDN on this template so that styling can be unif
     </head>
     <body class= "bg-gradient-to-r from-cyan-500 to-blue-500">
         <nav class = "py-6 px-6 flex justify-between items-center border-b border-gray-800">
-            <a href="/" class='text-xl font-semibold'>LOGO GOES HERE</a>
-            {% if user.is_authenticated %}Hello {{user}}! <a href= {% url "logout" %}>Logout</a>
-            {% endif %}
-
-            
+            <a href="/" class='text-xl font-semibold'>LOGO GOES HERE</a>        
                 <div class="space-x-4">
                     <ul>
-                        <li><a href="{% url "signup" %}" class="text-lg font-semibold hover:text-red-500">Signup</a></li>
-                        <li><a href="{% url "login" %}" class="text-lg font-semibold hover:text-blue-500">Login</a></li>
+                        <li><a href="{% url "signup" %}" class="text-lg font-semibold hover:text-green-500">Signup</a></li>
+                        <li><a href="{% url "login" %}" class="text-lg font-semibold hover:text-white-900">Login</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}" class='text-lg font-semibold hover:text-red-700'>Logout</a></li>
+                        {% endif %}
                     </ul>
                 </div>
         </nav>
-        <div class="px-6 py-6 ">
-        </div>
+        <div class="px-6 py-6 flex-auto">
         {%block content%}
         {%endblock%}
+    </div>
         <script src="" async defer></script>
     </body>
 </html>

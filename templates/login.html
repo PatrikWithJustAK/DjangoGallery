@@ -4,14 +4,13 @@
 <h1>Welcome, {{user.name}}</h1>
 {% else %}
 <h3>Welcome, Guest</h1>
-<h2>Login</h2>
-<form method="post" class=>
+<form method="post" class="border border-bold py-2 px-2">
     {% csrf_token %}
     {% for field in form %}
-      <p>  {{ field.label}} </p>
-       <div> {{ field }}} </div>
-        {% endfor %}
-    <button type="submit">Login</button>
+    <p class="text-sm">{{ field.label}} </p>
+    <div>{{ field }}</div>
+    {% endfor %}
+    <button type="submit" class="border border-gray-800 mx-2 my-1 bg-gray-300 rounded-full px-3">Login</button>
 </form>
 {% endif %}
 {% endblock  %}

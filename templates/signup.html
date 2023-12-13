@@ -1,18 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
 {% if user.is_authenticated %}
+<div>
 <h1>{{user.name}}! You're already signed up!</h1>
+<div>
 {% else %}
-<h3>Sign Up here!</h1>
-<h2>Login</h2>
-<form method="post">
+
+
+
+
+<form method="post" class="border border-bold py-2 px-2">
     {% csrf_token %}
     {% for field in form %}
-      <p>  {{ field.label}} </p>
-       <div> {{ field }}} </div>
+      <p class="text-sm">  {{ field.label}} </p>
+       <div class="flex px-2 justify-self-auto">
+         <div class="border rounded-sm">{{ field }} </div>
+        </div>
         {% endfor %}
-    <button type="submit">Login</button>
+    <button type="submit" class=" border border-gray-800 mx-2 my-1 bg-gray-300 rounded-full px-3">Login</button>
 </form>
+
 {% endif %}
 
 {% endblock  %}
