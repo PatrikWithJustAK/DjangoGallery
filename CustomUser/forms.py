@@ -7,4 +7,13 @@ class UserAuthenticationForm(AuthenticationForm):
         model = User
         fields = ("email","password")
 
+        def clean(self):
+            cleaned_data = super().clean() 
+            email = cleaned_data.get("email")
+            password = cleaned_data.get("password")
+
+
+
+            return cleaned_data
+
 
