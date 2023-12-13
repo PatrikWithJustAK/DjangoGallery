@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from .forms import UserAuthenticationForm
+from .forms import UserAuthenticationForm, CustomuserCreationForm
 def mainpageview(request):
     return render(request, template_name="base.html")
 
@@ -37,4 +37,15 @@ def logoutview(request):
 
 
 def signupview(request):
-    return render(request, template_name="signup.html")
+    if request.method == 'POST':
+        form = CustomuserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            loginview(request,user)
+            return redirect('index')
+        else: 
+            return redirect('signup')
+    else:
+        form = CustomuserCreationForm()
+        context = {"form" : form}
+        return render(request, "signup.html", context)

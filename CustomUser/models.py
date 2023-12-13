@@ -8,7 +8,7 @@ class CustomUserManager(UserManager):
         if not email:
             raise ValueError("Provide a valid Email Address to continue")
         email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
+        user = self.model(email= email, **extra_fields)
         user.set_password(password)
         user.save(using=self.db)
 
