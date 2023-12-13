@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .forms import UserAuthenticationForm
 def mainpageview(request):
     return render(request, template_name="base.html")
+
+
 def indexview(request):
     return render(request, template_name="index.html")
+
+
 def loginview(request):
     if request.method == 'POST':
         form = UserAuthenticationForm(data=request.POST)
@@ -21,5 +25,16 @@ def loginview(request):
         form = UserAuthenticationForm()  # Initialize the form correctly for GET requests
 
     return render(request, 'login.html', {'form': form})
+
+def logoutview(request):
+    user = request.user
+    if user is not None:
+        logout(request)
+        return redirect('index')
+    else:
+        return redirect('index') 
+
+
+
 def signupview(request):
     return render(request, template_name="signup.html")

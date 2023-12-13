@@ -18,7 +18,7 @@ We will import TailwindCSS as a CDN on this template so that styling can be unif
     <body>
         <nav class = "py-6 px-6 flex justify-between items-center border-b border-gray-800">
             <a href="/" class='text-xl font-semibold'>LOGO GOES HERE</a>
-            {% if user.is_authenticated %}Hello {{user}}! <div>Logout</div>
+            {% if user.is_authenticated %}Hello {{user}}! <a href= {% url "logout" %}>Logout</a>
             {% endif %}
 
             
