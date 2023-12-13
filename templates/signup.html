@@ -7,8 +7,11 @@
 {% else %}
 
 
-
-
+<div class="grid grid-cols-3">
+<div class="grid col-start-2 span-1 justify-center justify-items-center">
+    <div class="m-2 center">
+<h1 class="text-lg bold justify-center">Sign Up</h1>
+    </div>
 <form method="post" class="border border-bold py-2 px-2">
     {% csrf_token %}
     {% for field in form %}
@@ -19,6 +22,8 @@
         {% endfor %}
     <button type="submit" class=" border border-gray-800 mx-2 my-1 bg-gray-300 rounded-full px-3">Login</button>
 </form>
+</div>
+</div>
 
 {% endif %}
 

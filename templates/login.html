@@ -3,8 +3,10 @@
 {% if user.is_authenticated %}
 <h1>Welcome, {{user.name}}</h1>
 {% else %}
-<h3>Welcome, Guest</h1>
-<form method="post" class="border border-bold py-2 px-2">
+    <div class="grid grid-cols-3">
+    <div class="grid col-start-2 span-1 justify-center justify-items-center">
+        <h1>Login <Below/h1>
+<form method="post" class="py-2 px-2">
     {% csrf_token %}
     {% for field in form %}
     <p class="text-sm">{{ field.label}} </p>
@@ -12,6 +14,8 @@
     {% endfor %}
     <button type="submit" class="border border-gray-800 mx-2 my-1 bg-gray-300 rounded-full px-3">Login</button>
 </form>
+</div>
+</div>
 {% endif %}
 {% endblock  %}
 
