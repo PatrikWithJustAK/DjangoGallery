@@ -41,7 +41,7 @@ def signupview(request):
         form = CustomuserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            loginview(request,user)
+            login(request,user=user)
             return redirect('index')
         else: 
             return redirect('signup')
