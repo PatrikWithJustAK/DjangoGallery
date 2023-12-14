@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages #messages to handle errors outside of form logic.
 from .forms import UserAuthenticationForm, CustomuserCreationForm
 def mainpageview(request):
     return render(request, template_name="base.html")
@@ -21,6 +22,9 @@ def loginview(request):
             if user is not None:
                 login(request,user=user)
                 return redirect('index')  # Redirect to the index page after successful login
+            else:
+                messages.error(request, 'Invalid email or Password')
+
     else:
         form = UserAuthenticationForm()  # Initialize the form correctly for GET requests
 
@@ -43,8 +47,10 @@ def signupview(request):
             user = form.save()
             login(request,user=user)
             return redirect('index')
-        else: 
-            return redirect('signup')
+        else:
+            error = messages.error(request, 'Signup failed. Please correct the errors below.')
+            context = {"form": form, "error" : error}
+            return render(request, "signup.html", context)
     else:
         form = CustomuserCreationForm()
         context = {"form" : form}

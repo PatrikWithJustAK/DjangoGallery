@@ -4,18 +4,48 @@
 <h1>Welcome, {{user.name}}</h1>
 {% else %}
     <div class="grid grid-cols-3">
-    <div class="grid col-start-2 span-1 justify-center justify-items-center">
-        <h1>Login <Below/h1>
-<form method="post" class="py-2 px-2">
+        <div>{% if messages %}
+            {% for message in messages %}
+            <div class="alert flex-fill m-2 p-1 {{ message.tags }}">
+                <div class="border border-2 border-red-800 m-2 bg-white">
+                 <p class="font-bold m-2 text-red-800"> {{ message }}</p>
+                 </div>
+             </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+            </div>
+        <div>{% if form.non_field_errors %}
+<div class="error">
+    {% for error in form.non_field_errors %}
+    <div class="alert flex-fill m-2 p-1 {{ message.tags }}">
+        <div class="border border-2 border-red-800 m-2 bg-white">
+         <p class="font-bold m-2 text-red-800"> {{ error }}</p>
+         </div>
+     </div>
+        </div>
+    {% endfor %}
+</div>
+            {% endif %}
+<div class='grid col-start-2'>       
+<form method="post" class="py-2 px-2 justify-self-center">
     {% csrf_token %}
     {% for field in form %}
     <p class="text-sm">{{ field.label}} </p>
-    <div>{{ field }}</div>
+    <div>{{ field }}
+        {% if field.errors %}
+        {% for error in field.errors %}
+            <div class="error m-2 border-b border-red-600">
+                <p class="font-bold m-2 text-red-800">{{ error }}</p>
+            </div>
+        {% endfor %}
+    {% endif %}
+    </div>
     {% endfor %}
     <button type="submit" class="border border-gray-800 mx-2 my-1 bg-gray-300 rounded-full px-3">Login</button>
 </form>
 </div>
-</div>
+
 {% endif %}
 {% endblock  %}
 
