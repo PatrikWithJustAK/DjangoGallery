@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class='grid grid-cols-3 justify-items-center justify-self-center justify-contents-center'>
+
+
+{% for image in gallery %}
+<div class= 'grid col-start-2 justify-items-center border border-green-500 m-2 bg-gradient-to-r from-cyan-200 to-blue-300 shadow-xl shadow-black rounded-md'>
+    <div class='flex flex-shrink border border-red'><h1 class='font-bold'> {{image.title}} </h1></div>
+    <div><img src="{{image.image.url}}" class='object-scale-down w-62 h-62'></img></div>
+    <div><p> {{ image.description }} </p></div>
+</div>
+{% endfor %}
+{% endblock content %}

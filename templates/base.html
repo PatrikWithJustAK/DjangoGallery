@@ -20,10 +20,14 @@ We will import TailwindCSS as a CDN on this template so that styling can be unif
             <a href="{% url "index" %}" class='text-xl font-semibold'>LOGO GOES HERE</a>        
                 <div class="space-x-4">
                     <ul>
-                        <li><a href="{% url "signup" %}" class="text-lg font-semibold hover:text-green-500">Signup</a></li>
-                        <li><a href="{% url "login" %}" class="text-lg font-semibold hover:text-white-900">Login</a></li>
+
                         {% if user.is_authenticated %}
                         <li><a href="{% url 'logout' %}" class='text-lg font-semibold hover:text-red-700'>Logout</a></li>
+                        <li><a href="{% url 'add_artpiece' %}" class='text-lg font-semibold hover:text-green-500'>Add art</a></li>
+                        <li><a href="{% url 'dashboard' %}" class='text-lg font-semibold hover:text-green-500'>Dashboard</a></li>
+                        {% else %}
+                        <li><a href="{% url "signup" %}" class="text-lg font-semibold hover:text-green-500">Signup</a></li>
+                        <li><a href="{% url "login" %}" class="text-lg font-semibold hover:text-white-900">Login</a></li>
                         {% endif %}
                     </ul>
                 </div>
