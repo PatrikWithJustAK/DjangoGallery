@@ -2,12 +2,17 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages #messages to handle errors outside of form logic.
 from .forms import UserAuthenticationForm, CustomuserCreationForm
+from Gallery.models import ArtPiece
+
+
+
 def mainpageview(request):
     return render(request, template_name="base.html")
 
 
 def indexview(request):
-    return render(request, template_name="index.html")
+    return render(request,"index.html")
+
 
 
 def loginview(request):

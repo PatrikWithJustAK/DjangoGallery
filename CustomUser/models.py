@@ -49,4 +49,4 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.name or self.email.split('@')[0]
     def __str__(self):
-        return self.name
+        return self.email

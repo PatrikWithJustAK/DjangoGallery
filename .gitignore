@@ -1,3 +1,8 @@
 
 *.sqlite3
 *.pyc
+*.jpg
+*.webp
+__pycache__/
+migrations/
+static/

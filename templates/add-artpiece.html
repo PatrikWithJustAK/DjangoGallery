@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form method="post" enctype="multipart/form-data" class="grid grid-cols-5 bg-blue-300 rounded-full">
+    {% csrf_token %}
+    <div class="m-2 bg-gray-300 grid col-start-3 col-span-1">
+        {{ form.title.label }}  <!-- Renders the field's label -->
+        {{ form.title}}  <!-- Renders the field itself -->
+            <small style="color: grey;">{{ field.help_text }}</small>
+            <div style="color: red;">{{ error }}</div>
+    </div>
+    <div class="m-2 bg-gray-300 grid col-start-3 col-span-1">
+        {{ form.description.label }}  <!-- Renders the field's label -->
+        {{ form.description}}  <!-- Renders the field itself -->
+            <small style="color: grey;">{{ field.help_text }}</small>
+            <div style="color: red;">{{ error }}</div>
+    </div>
+
+    <div class="m-2 bg-gray-300 grid col-start-3 col-span-1">
+            {{ form.image.label }}  <!-- Renders the field's label -->
+            {{ form.image}}  <!-- Renders the field itself -->
+                <small style="color: grey;">{{ field.help_text }}</small>
+                <div style="color: red;">{{ error }}</div>
+    </div>
+    <div class="m-2 bg-gray-300 grid col-start-3 col-span-1">
+    <button type="submit">Submit</button>
+        </div>
+</form>
+{% endblock content %}
