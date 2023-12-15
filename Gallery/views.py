@@ -15,3 +15,6 @@ def add_artpieceview(request):
         form = ArtPieceForm()
 
     return render(request, 'add-artpiece.html', {'form': form})
+def galleryindexview(request):
+    context = {}
+    return render(request, 'index.html', context)
