@@ -2,6 +2,7 @@
 from .models import User
 from django.test import TestCase, Client
 from django.urls import reverse
+from .forms import UserAuthenticationForm
 
 #SignupViewTest
 #Contains all unit tests for the view "signupview"
@@ -52,7 +53,7 @@ class CustomUserModelTest(TestCase):
         #Test that the get_short_name method returns a string.
         user = User.objects.get(name='testuser')
         short_name = user.get_short_name()
-        self.assertIsInstance(short_name, str)         # Assert that the returned value is a string
+        self.assertIsInstance(short_name, str)# Assert that the returned value is a string
     #
     #
     #
@@ -63,16 +64,34 @@ class LoginViewTest(TestCase):
         #Set up client and URL for all tests in this view
     def setUp(self): 
         self.client = Client()
-        self.login_url = reverse('login')
+        User.objects.create_user(email='test@example.com', password='testpassword123') #set up dummy user for auth check
+        self.login_url = reverse('login') #setup url for client
+
 
         #Testing the loginview() to ensure that it responds to GET with a 200 status code
     def test_login_view_GET(self):
         response = self.client.get(self.login_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'login.html') 
+        self.assertIsInstance(response.context['form'], UserAuthenticationForm)
     # STILL NEED TO IMPLEMENT: 
     # test_login_view_authentication()
     # test_loginform_validation()
+
+
+    def test_successful_login_redirects_with_authentication(self):
+        login_data = {
+            'username': 'test@example.com',
+            'password': 'testpassword123'
+        }
+        response = self.client.post(self.login_url, login_data, follow=True)
+        
+        # Check for successful redirection
+        self.assertRedirects(response, reverse('add_artpiece'))  
+        # Verify that the user is authenticated
+        user = response.context.get('user')
+        self.assertTrue(user.is_authenticated)
+
 
 #IndexViewTest
 #Contains all unit tests for the view "indexview()"
