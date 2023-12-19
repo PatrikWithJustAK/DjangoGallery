@@ -5,5 +5,8 @@
 *.webp
 __pycache__/
 migrations/
-static/
+static/art_pieces
+static/admin
 testresults.txt
+*css
+*svg
