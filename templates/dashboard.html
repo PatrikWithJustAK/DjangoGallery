@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-
+{% load static %}
 <div class='grid grid-cols-3 justify-items-center justify-self-center justify-contents-center'>
 
 
@@ -11,39 +11,10 @@
     <div class='flex flex-shrink border border-red'><h1 class='font-bold'> {{image.title}}  </h1></div>
     <div><img src="{{image.image.url}}" class='object-scale-down w-62 h-62'></img></div>
     <div><p> {{ image.description }} </p></div>
-    <div><button class='deletebutton text-red-600'>DELETE</button><div id='csrf' value='{{csrf_token}}'>{% csrf_token %}</div></div>
+    <div><button class='deletebutton text-red-600'>DELETE</button><div id='csrf' value='{{csrf_token}}' hidden='true'>{{csrf_token}}</div></div>
 </div>
 {% endfor %}
-<script type='text/javascript'>
-let csrf_token = document.getElementById(csrf)
-    function addEventHandlers(){
-        const btnlist = document.getElementsByClassName('deletebutton'); 
-        for (let i = 0; i < btnlist.length; i++) { // loop through each button in the array
-            btnlist[i].addEventListener("click", function handleDelete(e){ 
-                let artpiece_id = e.target.parentNode.parentNode.id
-                deleteArtPiece(artpiece_id)
-                e.target.parentNode.parentNode.parentNode.style.display = 'none'
-            })
-    }
-}
-    
-    addEventHandlers()
-
-    async function deleteArtPiece(id){
-        const deleteurl= "http://127.0.0.1:8000/gallery/deleteart/"
-        let artid = id 
-        console.log(artid)
-        var CSRF_TOKEN = '{{ csrf_token }}';
-        let requesturl = deleteurl.concat(artid)
-        await fetch(requesturl, 
-            {
-            method: "DELETE",
-            headers:{
-                'X-CSRFTOKEN': CSRF_TOKEN,
-                "Content-Type": "application/json"
-                }
-    }) 
-}
+<script type='text/javascript' src={% static "dashboard.js" %}>
 
     </script>
 
