@@ -26,7 +26,8 @@ SECRET_KEY = "django-insecure-lm-^+x-#3fgx=k9*m6mo%uxk*kzc%g6$$n&w2k%*kk%71-s3ew
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+ 
 
 
 # Application definition
@@ -40,11 +41,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "CustomUser",
     "Gallery",
+    "corsheaders",
 ]
 
 AUTH_USER_MODEL = "CustomUser.User"
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -53,7 +56,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-
+CORS_ORIGIN_WHITELIST = ( 'http://localhost:8000',) 
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 ROOT_URLCONF = "DjangoGallery.urls"
 
 SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
@@ -117,7 +121,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
+STATIC_ROOT = BASE_DIR
 STATIC_URL = "static/"
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
