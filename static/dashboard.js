@@ -6,7 +6,7 @@ let csrf_token = document.getElementById("csrf")
             btnlist[i].addEventListener("click", function handleDelete(e){ 
                 let artpiece_id = e.target.parentNode.parentNode.id
                 deleteArtPiece(artpiece_id)
-                e.target.parentNode.parentNode.parentNode.style.display = 'none'
+                e.target.parentNode.parentNode.style.display = 'none'
             })
     }
 }
