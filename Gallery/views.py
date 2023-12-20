@@ -2,19 +2,23 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ArtPieceForm
 from .models import ArtPiece
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 @login_required
 def add_artpieceview(request):
     if request.method == 'POST':
-        form = ArtPieceForm(request.POST, request.FILES)
+        form = ArtPieceForm(request.POST, request.FILES)     
         if form.is_valid():
             artpiece = form.save(commit=False)
             artpiece.uploader = request.user
             artpiece.save()
             return redirect('dashboard')  # Redirect to a success page or home page
-    else:
-        form = ArtPieceForm()
-
+        else:
+            form = ArtPieceForm()
+            error = messages.error(request, 'Files must be png, gif, or jpg. Max 5MB')
+            context = {"form": form, "messagesr" : error}
+            return render(request, "add-artpiece.html", context)
+    form = ArtPieceForm()
     return render(request, 'add-artpiece.html', {'form': form})
 
 @login_required
