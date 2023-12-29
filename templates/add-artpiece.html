@@ -1,6 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
-
+<div class="grid col-start-1">
+    <div>{% if messages %}
+        {% for message in messages %}
+        <div class="alert flex-fill m-2 p-1 {{ message.tags }}">
+            <div class="border border-2 border-red-800 m-2 bg-white">
+             <p class="font-bold m-2 text-red-800"> {{ message }}</p>
+             </div>
+         </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+        </div>
+    <div>{% if form.non_field_errors %}
+<div class="error grid=col-start-1">
+{% for error in form.non_field_errors %}
+<div class="alert flex-fill m-2 p-1 {{ message.tags }}">
+    <div class="border border-2 border-red-800 m-2 bg-white">
+     <p class="font-bold m-2 text-red-800"> {{ error }}</p>
+     </div>
+ </div>
+    </div>
+{% endfor %}
+{% endif %}
+</div>
 <form method="post" enctype="multipart/form-data" class="grid grid-cols-5 bg-blue-300 rounded-full">
     {% csrf_token %}
     <div class="m-2 bg-gray-300 grid col-start-3 col-span-1">
